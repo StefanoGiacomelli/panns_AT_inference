@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="panns-AT-inference",
+    name="panns_AT_inference",
     version="0.1.2",
     author="Qiuqiang Kong, Stefano Giacomelli (Ph.D. student UnivAQ)",
     author_email="qiuqiangkong@gmail.com, stefano.giacomelli@graduate.univaq.it",
