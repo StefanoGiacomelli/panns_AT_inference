@@ -17,58 +17,6 @@ def move_data_to_device(x, device):
     return x.to(device)
 
 
-class Interpolator(nn.Module):
-    def __init__(self, ratio, interpolate_mode='nearest'):
-        """Interpolate the sound event detection result along the time axis.
-
-        Args:
-            ratio: int
-            interpolate_mode: str
-
-        """
-        super(Interpolator, self).__init__()
-
-        if interpolate_mode == 'nearest':
-            self.interpolator = NearestInterpolator(ratio)
-
-    def forward(self, x):
-        """Interpolate the sound event detection result along the time axis.
-        
-        Args:
-            x: (batch_size, time_steps, classes_num)
-
-        Returns:
-            (batch_size, new_time_steps, classes_num)
-        """
-        return self.interpolator(x)
-
-
-class NearestInterpolator(nn.Module):
-    def __init__(self, ratio):
-        """Nearest interpolate the sound event detection result along the time axis.
-
-        Args:
-            ratio: int
-        """
-        super(NearestInterpolator, self).__init__()
-
-        self.ratio = ratio
-
-    def forward(self, x):
-        """Interpolate the sound event detection result along the time axis.
-        
-        Args:
-            x: (batch_size, time_steps, classes_num)
-
-        Returns:
-            upsampled: (batch_size, new_time_steps, classes_num)
-        """
-        (batch_size, time_steps, classes_num) = x.shape
-        upsampled = x[:, :, None, :].repeat(1, 1, self.ratio, 1)
-        upsampled = upsampled.reshape(batch_size, time_steps * self.ratio, classes_num)
-        return upsampled
-
-
 def pad_framewise_output(framewise_output, frames_num):
     """Pad framewise_output to the same length as input frames.
     Args:
