@@ -19,8 +19,8 @@ For example:
 
 ```
 import librosa
-import panns_inference
-from panns_inference import AudioTagging, labels
+import panns_AT_inference
+from panns_AT_inference import AudioTagging, labels
 
 audio_path = 'examples/R9_ZSCveAHg_7s.wav'
 (audio, _) = librosa.core.load(audio_path, sr=32000, mono=True)
@@ -49,5 +49,21 @@ Animal: 0.009
 Vehicle: 0.008
 </pre>
 
-## Cite
+## References
 [1] Kong, Qiuqiang, Yin Cao, Turab Iqbal, Yuxuan Wang, Wenwu Wang, and Mark D. Plumbley. "PANNs: Large-Scale Pretrained Audio Neural Networks for Audio Pattern Recognition." arXiv preprint arXiv:1912.10211 (2019).
+
+[2] 
+```
+@article{9229505,
+  author={Kong, Qiuqiang and Cao, Yin and Iqbal, Turab and Wang, Yuxuan and Wang, Wenwu and Plumbley, Mark D.},
+  journal={IEEE/ACM Transactions on Audio, Speech, and Language Processing}, 
+  title={PANNs: Large-Scale Pretrained Audio Neural Networks for Audio Pattern Recognition}, 
+  year={2020},
+  volume={28},
+  number={},
+  pages={2880 -- 2894},
+  doi={10.1109/TASLP.2020.3030497}
+  }
+```
+
+[3] Official GitHub repository: https://github.com/qiuqiangkong/audioset_tagging_cnn , https://github.com/qiuqiangkong/panns_inference
