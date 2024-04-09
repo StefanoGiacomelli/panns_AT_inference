@@ -7,7 +7,7 @@ This is a forked repository/project for Audio Tagging only w. the top-3 models (
 ## Installation
 PyTorch>=1.0 is required.
 ```
-$ pip install panns-AT-inference
+$ pip install panns_AT_inference
 ```
 
 ## Usage
