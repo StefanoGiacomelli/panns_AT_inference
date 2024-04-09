@@ -7,7 +7,7 @@ import torch
 from pathlib import Path
 
 from .pytorch_utils import move_data_to_device
-from .models import Cnn14, ResNet38, Wavegram_Logmel_Cnn14, Cnn14_DecisionLevelMax,
+from .models import Cnn14, ResNet38, Wavegram_Logmel_Cnn14, Cnn14_DecisionLevelMax
 from .config import labels, classes_num
 
 
@@ -24,16 +24,27 @@ def get_filename(path):
 
 
 class AudioTagging(object):
-    def __init__(self, model=None, checkpoint_path=None, device='cuda'):
+    def __init__(self, model_name=None, device='cuda'):
         """Audio tagging inference wrapper.
         """
-        if not checkpoint_path:
-            checkpoint_path='{}/panns_data/Cnn14_mAP=0.431.pth'.format(str(Path.home()))
-        print('Checkpoint path: {}'.format(checkpoint_path))
+        checkpoint_path = None
         
+        if model_name in ['Cnn14', None]:
+            checkpoint_path='{}/panns_data/Cnn14_mAP=0.431.pth'.format(str(Path.home()))
+        elif model_name == 'ResNet38':
+            checkpoint_path='{}/panns_data/ResNet38_mAP=0.434.pth'.format(str(Path.home()))
+        elif model_name == 'Wavegram_Logmel_Cnn14':
+            checkpoint_path='{}/panns_data/Wavegram_Logmel_Cnn14_mAP=0.439.pth'.format(str(Path.home()))
+        print('Checkpoint path: {}'.format(checkpoint_path))      
+    
         if not os.path.exists(checkpoint_path) or os.path.getsize(checkpoint_path) < 3e8:
             create_folder(os.path.dirname(checkpoint_path))
-            zenodo_path = 'https://zenodo.org/record/3987831/files/Cnn14_mAP%3D0.431.pth?download=1'
+            if model_name in ['Cnn14', None]:            
+                zenodo_path = 'https://zenodo.org/record/3987831/files/Cnn14_mAP%3D0.431.pth?download=1'
+            elif model_name == 'ResNet38':
+                zenodo_path = 'https://zenodo.org/records/3987831/files/ResNet38_mAP%3D0.434.pth?download=1'
+            elif model_name == 'Wavegram_Logmel_Cnn14':
+                zenodo_path = 'https://zenodo.org/records/3987831/files/Wavegram_Logmel_Cnn14_mAP%3D0.439.pth?download=1'
             os.system('wget -O "{}" "{}"'.format(checkpoint_path, zenodo_path))
 
         if device == 'cuda' and torch.cuda.is_available():
@@ -45,13 +56,19 @@ class AudioTagging(object):
         self.classes_num = classes_num
 
         # Model
-        if model is None:
-            self.model = Cnn14(sample_rate=32000, window_size=1024, 
-                hop_size=320, mel_bins=64, fmin=50, fmax=14000, 
-                classes_num=self.classes_num)
-        else:
-            self.model = model
-
+        if model_name in ['Cnn14', None]:
+            self.model = Cnn14(sample_rate=32000, window_size=1024, hop_size=320, 
+                               mel_bins=64, fmin=50, fmax=14000, 
+                               classes_num=self.classes_num)
+        elif model_name == 'ResNet38':
+            self.model = ResNet38(sample_rate=32000, window_size=1024, hop_size=320, 
+                                  mel_bins=64, fmin=50, fmax=14000, 
+                                  classes_num=self.classes_num)
+        elif model_name == 'Wavegram_Logmel_Cnn14':
+            self.model = Wavegram_logmel_Cnn14(sample_rate=32000, window_size=1024, hop_size=320, 
+                                               mel_bins=64, fmin=50, fmax=14000, 
+                                               classes_num=self.classes_num)
+        
         checkpoint = torch.load(checkpoint_path, map_location=self.device)
         self.model.load_state_dict(checkpoint['model'])
 
@@ -76,6 +93,7 @@ class AudioTagging(object):
         return clipwise_output, embedding
 
 
+#--------------------------------------------------------------------------------------------------------------------
 class SoundEventDetection(object):
     def __init__(self, model=None, checkpoint_path=None, device='cuda', interpolate_mode='nearest'):
         """Sound event detection inference wrapper.
