@@ -11,7 +11,7 @@ setuptools.setup(
     description="panns_AT_inference: audio tagging inference toolbox",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/StefanoGiacomelli/panns_inference",
+    url="https://github.com/StefanoGiacomelli/panns_AT_inference",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
