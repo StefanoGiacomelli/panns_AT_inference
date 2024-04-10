@@ -27,7 +27,7 @@ audio_path = 'examples/R9_ZSCveAHg_7s.wav'
 audio = audio[None, :]  # (batch_size, segment_samples)
 
 print('------ Audio tagging ------')
-at = AudioTagging(checkpoint_path=None, device='cuda')
+at = AudioTagging(model_name=None, device='cuda')
 (clipwise_output, embedding) = at.inference(audio)
 ```
 
