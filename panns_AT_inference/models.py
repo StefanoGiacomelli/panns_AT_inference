@@ -35,7 +35,7 @@ def init_bn(bn):
     bn.weight.data.fill_(1.)
 
 
-# Auxiliary building blocks
+# ---------------------------------------------- Auxiliary building blocks ----------------------------------------------
 class ConvBlock(nn.Module):
     def __init__(self, in_channels, out_channels):
         
@@ -321,7 +321,7 @@ class ConvPreWavBlock(nn.Module):
         return x
 
 
-# ----------------------------------------- Audio Tagging Models -----------------------------------------
+# ------------------------------------------------- Audio Tagging Models ------------------------------------------------
 class Cnn14(nn.Module):
     def __init__(self, sample_rate, window_size, hop_size, mel_bins, fmin, 
         fmax, classes_num):
