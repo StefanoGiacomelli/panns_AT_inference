@@ -65,7 +65,7 @@ class AudioTagging(object):
                                   mel_bins=64, fmin=50, fmax=14000, 
                                   classes_num=self.classes_num)
         elif model_name == 'Wavegram_Logmel_Cnn14':
-            self.model = Wavegram_logmel_Cnn14(sample_rate=32000, window_size=1024, hop_size=320, 
+            self.model = Wavegram_Logmel_Cnn14(sample_rate=32000, window_size=1024, hop_size=320,
                                                mel_bins=64, fmin=50, fmax=14000, 
                                                classes_num=self.classes_num)
         
