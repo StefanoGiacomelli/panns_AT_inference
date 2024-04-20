@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="panns_AT_inference",
-    version="0.1.2",
+    version="0.1.3",
     author="Qiuqiang Kong, Stefano Giacomelli (Ph.D. student UnivAQ)",
     author_email="qiuqiangkong@gmail.com, stefano.giacomelli@graduate.univaq.it",
     description="panns_AT_inference: audio tagging inference toolbox",
