@@ -16,7 +16,7 @@ from torch.nn.parameter import Parameter
 
 from torchlibrosa.stft import Spectrogram, LogmelFilterBank
 from torchlibrosa.augmentation import SpecAugmentation
-from .pytorch_utils import do_mixup, pad_framewise_output, Interpolator
+from .pytorch_utils import do_mixup, pad_framewise_output
  
 
 # ----------------------------------------- Parameters initialization functions -----------------------------------------
