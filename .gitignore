@@ -4,3 +4,9 @@
 *.hdf5
 *.pyc
 __pycache__
+.gitignore
+venv/
+*.egg-info/
+build/
+dist/
+.idea
