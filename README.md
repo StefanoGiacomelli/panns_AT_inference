@@ -1,4 +1,4 @@
-# PANNs AT (Audio Tagging) inferece
+# PANNs AT (Audio Tagging) inference
 
 **panns_AT_inference** provides an easy to use Python interface for audio tagging. The audio tagging models are trained from PANNs: Large-Scale Pretrained Audio Neural Networks for Audio Pattern Recognition: https://github.com/qiuqiangkong/audioset_tagging_cnn
 
